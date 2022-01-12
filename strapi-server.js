@@ -11,6 +11,10 @@ module.exports = (plugin) => {
       return;
  
   };
+   plugin.controllers.auth.register = async (ctx) => {
+    const user = ctx.state.user;
+     // here you can write your custom code for user register
+   }
 
   // Add the custom route
   plugin.routes['content-api'].routes.unshift({
@@ -20,7 +24,16 @@ module.exports = (plugin) => {
     config: {
         prefix: '',
     }
-  });
+  },
+  {
+    method: 'POST',
+    path: '/auth/local/register',
+    handler: 'auth.register',
+    config: {
+        prefix: '',
+    }
+  }
+   );
 
   return plugin;
 };
